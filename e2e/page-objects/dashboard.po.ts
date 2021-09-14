@@ -78,8 +78,7 @@ export class DashboardViewPage {
 
   // get note panel default values
   getNotePanelDefaultValues(): any {
-    let inputTitle;
-    let inputText;
+    let inputTitle, inputText;
     inputTitle = this.getTitleInputBox().getAttribute('value');
     inputText = this.getTextInputBox().getAttribute('value');
     return Promise.all([inputTitle, inputText]).then( (values) => {

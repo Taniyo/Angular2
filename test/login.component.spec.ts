@@ -1,5 +1,3 @@
-
-import {throwError as observableThrowError, of as observableOf,  Observable } from 'rxjs';
 import { async, ComponentFixture, TestBed, fakeAsync, tick, inject} from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,9 +39,10 @@ import { AuthenticationService } from '../src/app/services/authentication.servic
 import { RouterService } from '../src/app/services/router.service';
 import { LoginComponent } from '../src/app/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 
 
 
@@ -152,12 +151,12 @@ describe('LoginComponent', () => {
 
   it('should handle to login into the system', fakeAsync(() => {
     positiveResponse = testConfig.positive;
-    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(observableOf(positiveResponse));
+    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(Observable.of(positiveResponse));
     const token = testConfig.positive.token;
-    spySetBearerToken = spyOn(authenticationService, 'setBearerToken').and.callFake(() => {
+    spySetBearerToken = spyOn(authenticationService, 'setBearerToken').and.callFake(function(){
       localStorage.setItem('bearerToken', token);
     });
-    spyRouteToDashboard = spyOn(routerService, 'routeToDashboard').and.callFake(() => {});
+    spyRouteToDashboard = spyOn(routerService, 'routeToDashboard').and.callFake(function(){});
     const username = new FormControl('stranger');
     loginComponent.username = username;
     const password = new FormControl('password');
@@ -171,7 +170,7 @@ describe('LoginComponent', () => {
     loginComponent.submitMessage = ' ';
     fixture.detectChanges();
     debugElement = fixture.debugElement.query(By.css('.error-message'));
-    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(observableThrowError(errorMessage));
+    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(Observable.throw(errorMessage));
 
     const username = new FormControl('stranger');
     loginComponent.username = username;
@@ -198,7 +197,7 @@ describe('LoginComponent', () => {
     loginComponent.submitMessage = ' ';
     fixture.detectChanges();
     debugElement = fixture.debugElement.query(By.css('.error-message'));
-    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(observableThrowError(errorMessage));
+    spyAuthenticateUser = spyOn(authenticationService, 'authenticateUser').and.returnValue(Observable.throw(errorMessage));
 
     const username = new FormControl('stranger');
     loginComponent.username = username;

@@ -39,7 +39,9 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,
+      { enableTracing: false } // <-- debugging purposes only
+    ),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

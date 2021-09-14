@@ -1,12 +1,11 @@
-
-import {of as observableOf,  Observable } from 'rxjs';
 import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from '../src/app/dashboard/dashboard.component';
 import { NotesService } from '../src/app/services/notes.service';
 import { AuthenticationService } from '../src/app/services/authentication.service';
-
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 
 const testConfig = {
@@ -62,7 +61,7 @@ describe('DashboardComponent', () => {
 
   it('should handle to get all notes', fakeAsync(() => {
     positiveResponse = testConfig.getNotes.positive;
-    spyGetNotes = spyOn(notesService, 'getNotes').and.returnValue(observableOf(positiveResponse));
+    spyGetNotes = spyOn(notesService, 'getNotes').and.returnValue(Observable.of(positiveResponse));
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -72,7 +71,7 @@ describe('DashboardComponent', () => {
 
   it('should handle if no note is created by user', fakeAsync(() => {
     negativeResponse = testConfig.getNotes.negative;
-    spyGetNotes = spyOn(notesService, 'getNotes').and.returnValue(observableOf(negativeResponse));
+    spyGetNotes = spyOn(notesService, 'getNotes').and.returnValue(Observable.of(negativeResponse));
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

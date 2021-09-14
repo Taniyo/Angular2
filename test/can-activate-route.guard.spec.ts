@@ -37,14 +37,14 @@ describe('CanActivateRouteGuard', () => {
 
    // ------------ Positive testing of isUserAuthenticated------------//
   it('should handle to know if user is aunthenticated', fakeAsync(() => {
-    spyCanActivate = spyOn(canActivateRouteGuard, 'canActivate').and.callFake( () => true );
+    spyCanActivate = spyOn(canActivateRouteGuard, 'canActivate').and.callFake( function() { return true; } );
     response = canActivateRouteGuard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
     expect(response).toBe(true, 'user is authenticated');
   }));
 
    // ------------ Positive testing of isUserAuthenticated------------//
   it('should handle to know if user is not aunthenticated', fakeAsync(() => {
-    spyCanActivate = spyOn(canActivateRouteGuard, 'canActivate').and.callFake( () =>  false  );
+    spyCanActivate = spyOn(canActivateRouteGuard, 'canActivate').and.callFake( function() { return false; } );
     response = canActivateRouteGuard.canActivate(activatedRouteSnapshot, routerStateSnapshot);
     expect(response).toBe(false, 'user is not authenticated');
   }));

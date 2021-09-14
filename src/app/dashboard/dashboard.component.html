@@ -2,7 +2,6 @@
 <div style="text-align:center">
     <label class="error-message">{{ errMessage }}</label>
 </div>
-
 <!-- Expansion panel to add new notes -->
 <div style="text-align:center">
     <div class="note-container">
@@ -24,7 +23,6 @@
     <div>
     </div>
 
-    <!-- Load and display the collection of notes from server as Material Cards with card title set to note title and card content set to note text  -->
     <div class="note-mat-card-list">
         <mat-list *ngFor="let note of notes">
             <mat-list-item>
@@ -36,3 +34,9 @@
         </mat-list>
     </div>
 </div>
+
+
+
+
+
+<!-- Load and display the collection of notes from server as Material Cards with card title set to note title and card content set to note text  -->

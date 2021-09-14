@@ -47,8 +47,7 @@ export class LoginPage {
   }
   // default values of input boxes
   getLoginInputBoxesDefaultValues(): any {
-    let inputUsername;
-    let inputPassword;
+    let inputUsername, inputPassword;
     inputUsername = this.getUserNameInputBox().getAttribute('value');
     inputPassword = this.getPasswordInputBox().getAttribute('value');
     return Promise.all([inputUsername, inputPassword]).then( (values) => {
